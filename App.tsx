@@ -1,24 +1,28 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Image source={{ uri: 'https://picsum.photos/600/400' }} style={styles.image} />
+      <Text style={styles.title}>Dashboard</Text>
+      <Text style={styles.subtitle}>Resumen del negocio</Text>
 
-        <View style={styles.content}>
-          <Text style={styles.category}>OFERTA</Text>
-          <Text style={styles.title}>Auriculares Wireless</Text>
-          <Text style={styles.rating}>⭐ 4.8</Text>
-
-          <View style={styles.bottom}>
-            <Text style={styles.price}>89,99 €</Text>
-            <Pressable style={styles.button}>
-              <Text style={styles.buttonText}>AÑADIR</Text>
-            </Pressable>
-          </View>
-        </View>
+      <View style={styles.grid}>
+        <Metric title="Ventas" value="12.450 €" change="+12%" />
+        <Metric title="Clientes" value="348" change="+8%" />
+        <Metric title="Pedidos" value="1.024" change="+18%" />
+        <Metric title="Conversión" value="7,4%" change="+2%" />
+        <Metric title="Tickets" value="86" change="+5%" />
       </View>
+    </View>
+  );
+}
+
+function Metric({ title, value, change }: { title: string; value: string; change: string }) {
+  return (
+    <View style={styles.card}>
+      <Text style={styles.label}>{title}</Text>
+      <Text style={styles.value}>{value}</Text>
+      <Text style={styles.change}>{change}</Text>
     </View>
   );
 }
@@ -26,58 +30,43 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     padding: 24,
-    backgroundColor: '#101d3f',
-  },
-  card: {
-    backgroundColor: '#161b22',
-    borderRadius: 20,
-    overflow: 'hidden', 
-  },
-  image: {
-    margin: 16,
-    width: 'auto',
-    height: 180,
-    borderRadius: 12,
-  },
-  content: {
-    padding: 20,
-  },
-  category: {
-    color: '#f87171',
-    fontWeight: 'bold',
-    fontSize: 12,
+    paddingTop: 70,
+    backgroundColor: '#0f1b3b',
   },
   title: {
-    marginTop: 6,
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
     color: '#ffffff',
   },
-  rating: {
-    marginTop: 10,
-    color: '#fbbf24',
+  subtitle: {
+    color: '#fefeff',
+    marginTop: 5,
+    marginBottom: 28,
   },
-  bottom: {
+  grid: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 24,
+    flexWrap: 'wrap',
+    gap: 12,
   },
-  price: {
-    fontSize: 25,
-    fontWeight: 'bold',
+  card: {
+    width: '48%',
+    backgroundColor: '#161b22',
+    padding: 18,
+    borderRadius: 16,
+  },
+  label: {
+    color: '#ffffff', 
+  },
+  value: {
     color: '#ffffff',
-  },
-  button: {
-    backgroundColor: '#21262d', 
-    paddingVertical: 12,
-    paddingHorizontal: 18,
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: 'white',
+    fontSize: 23,
     fontWeight: 'bold',
+    marginTop: 8,
+  },
+  change: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    marginTop: 8,
   },
 });
