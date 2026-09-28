@@ -1,32 +1,36 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-
-const products = [
-  { id: '1', icon: '⌨️', name: 'Teclado', price: '59 €' },
-  { id: '2', icon: '🖱️', name: 'Ratón', price: '39 €' },
-  { id: '3', icon: '🖥️', name: 'Monitor', price: '199 €' },
-  { id: '4', icon: '🎧', name: 'Auriculares', price: '79 €' },
-  { id: '5', icon: '💻', name: 'Portátil', price: '899 €' },
-  { id: '6', icon: '📱', name: 'Móvil', price: '599 €' },
-];
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Productos</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.hello}>Buenos días 👋</Text>
+      <Text style={styles.user}>Laura</Text>
 
-      <FlatList
-        data={products}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <Text style={styles.icon}>{item.icon}</Text>
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.price}>{item.price}</Text>
-          </View>
-        )}
-      />
+      <View style={styles.balanceCard}>
+        <Text style={styles.balanceLabel}>Saldo disponible</Text>
+        <Text style={styles.balance}>4.280,32 €</Text>
+      </View>
+
+      <Text style={styles.sectionTitle}>Movimientos</Text>
+      <Movement title="Nómina" amount="+2.340 €" isPositive={true} />
+      <Movement title="Supermercado" amount="-42,80 €" isPositive={false} />
+    </ScrollView>
+  );
+}
+
+type MovementProps = {
+  title: string;
+  amount: string;
+  isPositive: boolean;
+};
+
+function Movement({ title, amount, isPositive }: MovementProps) {
+  return (
+    <View style={styles.movement}>
+      <Text style={styles.movementTitle}>{title}</Text>
+      <Text style={[styles.amount, { color: isPositive ? '#4ade80' : '#ffffff' }]}>
+        {amount}
+      </Text>
     </View>
   );
 }
@@ -34,39 +38,55 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    backgroundColor: '#19274b',
+    backgroundColor: '#122145',
+    paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
+  hello: {
+    marginTop: 60,
+    color: '#94a3b8',
+  },
+  user: {
     color: '#ffffff',
-  },
-  row: {
-    gap: 10,
-    marginBottom: 8,
-  },
-  card: {
-    width: '48%',
-    backgroundColor: '#161b22',
-    padding: 10,
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginBottom: 24,
+    },
+  balanceCard: {
+    backgroundColor: '#06172e',
+    padding: 24,
     borderRadius: 12,
   },
-  icon: {
-    fontSize: 24,
+  balanceLabel: {
+    color: '#94a3b8',
   },
-  name: {
-    marginTop: 6,
-    fontSize: 14,
+  balance: {
+    color: 'white',
+    fontSize: 35,
+    fontWeight: 'bold',
+    marginTop: 8,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 28,
+    marginBottom: 12,
+    color: '#ffffff',
+  },
+  movement: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#161b22', 
+    padding: 18,
+    borderRadius: 14,
+    marginBottom: 10,
+  },
+  movementTitle: {
     fontWeight: 'bold',
     color: '#ffffff',
   },
-  price: {
-    marginTop: 2,
-    color: '#60a5fa',
+  amount: {
     fontWeight: 'bold',
-    fontSize: 13,
+    fontSize: 16,
   },
 });
