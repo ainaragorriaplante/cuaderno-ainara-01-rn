@@ -1,28 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Dashboard</Text>
-      <Text style={styles.subtitle}>Resumen del negocio</Text>
+    <ScrollView style={styles.container}>
+      <Text style={styles.header}>Noticias</Text>
 
-      <View style={styles.grid}>
-        <Metric title="Ventas" value="12.450 €" change="+12%" />
-        <Metric title="Clientes" value="348" change="+8%" />
-        <Metric title="Pedidos" value="1.024" change="+18%" />
-        <Metric title="Conversión" value="7,4%" change="+2%" />
-        <Metric title="Tickets" value="86" change="+5%" />
-      </View>
-    </View>
+      <NewsCard category="TECNOLOGÍA" title="IA y desarrollo" />
+      <NewsCard category="MÓVIL" title="React Native" />
+      <NewsCard category="CLOUD" title="Arquitecturas cloud" />
+      <NewsCard category="DISEÑO" title="Interfaces accesibles" />
+    </ScrollView>
   );
 }
 
-function Metric({ title, value, change }: { title: string; value: string; change: string }) {
+function NewsCard({ category, title }: { category: string; title: string }) {
   return (
     <View style={styles.card}>
-      <Text style={styles.label}>{title}</Text>
-      <Text style={styles.value}>{value}</Text>
-      <Text style={styles.change}>{change}</Text>
+      <Text style={styles.category}>{category}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
 }
@@ -30,43 +25,31 @@ function Metric({ title, value, change }: { title: string; value: string; change
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
-    paddingTop: 70,
-    backgroundColor: '#0f1b3b',
+    backgroundColor: '#0e1d43',
+    paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 32,
+  header: {
+    fontSize: 34,
     fontWeight: 'bold',
+    marginTop: 60,
+    marginBottom: 20,
     color: '#ffffff',
-  },
-  subtitle: {
-    color: '#fefeff',
-    marginTop: 5,
-    marginBottom: 28,
-  },
-  grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
   },
   card: {
-    width: '48%',
     backgroundColor: '#161b22',
     padding: 18,
-    borderRadius: 16,
+    borderRadius: 18,
+    marginBottom: 14,
   },
-  label: {
-    color: '#ffffff', 
-  },
-  value: {
-    color: '#ffffff',
-    fontSize: 23,
+  category: {
+    color: '#60a5fa',
+    fontSize: 12,
     fontWeight: 'bold',
-    marginTop: 8,
   },
-  change: {
-    color: '#ffffff',
+  title: {
+    marginTop: 7,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginTop: 8,
+    color: '#ffffff',
   },
 });
