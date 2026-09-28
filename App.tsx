@@ -1,30 +1,27 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Image
-          source={{ uri: 'https://i.pravatar.cc/300' }}
-          style={styles.avatar}
-        />
-        <Text style={styles.name}>Laura Martínez</Text>
-        <Text style={styles.job}>Diseñadora UX/UI</Text>
+        <Text style={styles.title}>Bienvenido</Text>
+        <Text style={styles.subtitle}>Introduce tus datos</Text>
 
-        <View style={styles.stats}>
-          <View style={styles.stat}>
-            <Text style={styles.number}>24</Text>
-            <Text style={styles.label}>Proyectos</Text>
-          </View>
-          <View style={styles.stat}>
-            <Text style={styles.number}>1280</Text>
-            <Text style={styles.label}>Seguidores</Text>
-          </View>
-          <View style={styles.stat}>
-            <Text style={styles.number}>86</Text>
-            <Text style={styles.label}>Contactos</Text>
-          </View>
-        </View>
+        <TextInput 
+          style={styles.input} 
+          placeholder="Correo electrónico" 
+          placeholderTextColor="#64748b" 
+        />
+        <TextInput 
+          style={styles.input} 
+          placeholder="Contraseña" 
+          placeholderTextColor="#64748b" 
+          secureTextEntry 
+        />
+
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>INICIAR SESIÓN</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -35,46 +32,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: '#19283c',
+    backgroundColor: '#0b0f19',
   },
   card: {
-    backgroundColor: '#262626',
+    backgroundColor: '#161b22',
     padding: 28,
     borderRadius: 22,
-    alignItems: 'center',
   },
-  avatar: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-  },
-  name: {
-    marginTop: 18,
-    fontSize: 25,
+  title: {
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#e2e8f0',
-  },
-  job: {
-    marginTop: 4,
-    color: '#64748b',
-  },
-  stats: {
-    color: '#eff2f6',
-    flexDirection: 'row',
-    gap: 28,
-    marginTop: 24,
-  },
-  stat: {
-    color: '#f4f4f4',
-    alignItems: 'center',
-  },
-  number: {
-    color: '#f4f4f4',
-    fontSize: 21,
-    fontWeight: 'bold',
-  },
-  label:{
-    fontSize: 14,
     color: '#ffffff',
-  }
+  },
+  subtitle: {
+    marginTop: 8,
+    marginBottom: 28,
+    color: '#94a3b8',
+  },
+  input: {
+    backgroundColor: '#21262d',
+    color: '#ffffff',
+    borderRadius: 12,
+    marginBottom: 14,
+  },
+  button: {
+    marginTop: 8,
+    backgroundColor: '#2563eb',
+    padding: 16,
+    borderRadius: 12,
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
