@@ -2,35 +2,41 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.hello}>Buenos días 👋</Text>
-      <Text style={styles.user}>Laura</Text>
+    <ScrollView 
+      style={styles.container} 
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <Text style={styles.greeting}>Buenos días,</Text>
+      <Text style={styles.user}>Laura 👋</Text>
 
-      <View style={styles.balanceCard}>
-        <Text style={styles.balanceLabel}>Saldo disponible</Text>
-        <Text style={styles.balance}>4.280,32 €</Text>
+      <View style={styles.goalCard}>
+        <Text style={styles.goalLabel}>OBJETIVO DIARIO</Text>
+        <Text style={styles.steps}>8.200</Text>
+
+        <View style={styles.progressBackground}>
+          <View style={styles.progress} />
+        </View>
       </View>
 
-      <Text style={styles.sectionTitle}>Movimientos</Text>
-      <Movement title="Nómina" amount="+2.340 €" isPositive={true} />
-      <Movement title="Supermercado" amount="-42,80 €" isPositive={false} />
+      <Text style={styles.sectionTitle}>Resumen</Text>
+
+      <View style={styles.grid}>
+        <StatCard icon="🔥" value="610" label="Calorías" />
+        <StatCard icon="⏱" value="55 min" label="Actividad" />
+        <StatCard icon="❤️" value="69" label="Pulsaciones" />
+        <StatCard icon="📍" value="6,3 km" label="Distancia" />
+      </View>
     </ScrollView>
   );
 }
 
-type MovementProps = {
-  title: string;
-  amount: string;
-  isPositive: boolean;
-};
-
-function Movement({ title, amount, isPositive }: MovementProps) {
+function StatCard({ icon, value, label }: { icon: string; value: string; label: string }) {
   return (
-    <View style={styles.movement}>
-      <Text style={styles.movementTitle}>{title}</Text>
-      <Text style={[styles.amount, { color: isPositive ? '#4ade80' : '#ffffff' }]}>
-        {amount}
-      </Text>
+    <View style={styles.statCard}>
+      <Text style={styles.statIcon}>{icon}</Text>
+      <Text style={styles.statValue}>{value}</Text>
+      <Text style={styles.statLabel}>{label}</Text>
     </View>
   );
 }
@@ -38,55 +44,80 @@ function Movement({ title, amount, isPositive }: MovementProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#122145',
-    paddingHorizontal: 20,
+    backgroundColor: '#122044',
   },
-  hello: {
-    marginTop: 60,
+  contentContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
+  greeting: {
     color: '#94a3b8',
+    fontSize: 15,
   },
   user: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 16,
     color: '#ffffff',
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 24,
-    },
-  balanceCard: {
-    backgroundColor: '#06172e',
-    padding: 24,
-    borderRadius: 12,
   },
-  balanceLabel: {
+  goalCard: {
+    backgroundColor: '#161b22',
+    padding: 18,
+    borderRadius: 18,
+  },
+  goalLabel: {
     color: '#94a3b8',
-  },
-  balance: {
-    color: 'white',
-    fontSize: 35,
     fontWeight: 'bold',
+    fontSize: 12,
+  },
+  steps: {
     marginTop: 8,
+    color: 'white',
+    fontSize: 36,
+  },
+  progressBackground: {
+    height: 8,
+    backgroundColor: '#21262d',
+    borderRadius: 4,
+    marginTop: 16,
+    overflow: 'hidden',
+  },
+  progress: {
+    width: '82%',
+    height: '100%',
+    backgroundColor: '#22c55e',
   },
   sectionTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    marginTop: 28,
-    marginBottom: 12,
-    color: '#ffffff',
-  },
-  movement: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#161b22', 
-    padding: 18,
-    borderRadius: 14,
+    marginTop: 20,
     marginBottom: 10,
-  },
-  movementTitle: {
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#ffffff',
   },
-  amount: {
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  statCard: {
+    width: '48%',
+    backgroundColor: '#161b22',
+    borderRadius: 14,
+    padding: 14,
+  },
+  statIcon: {
+    fontSize: 24,
+  },
+  statValue: {
+    marginTop: 8,
+    fontSize: 18,
     fontWeight: 'bold',
-    fontSize: 16,
+    color: '#ffffff',
+  },
+  statLabel: {
+    marginTop: 2,
+    color: '#94a3b8',
+    fontSize: 13,
   },
 });
