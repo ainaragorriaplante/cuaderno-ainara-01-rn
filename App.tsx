@@ -1,23 +1,32 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+
+const products = [
+  { id: '1', icon: '⌨️', name: 'Teclado', price: '59 €' },
+  { id: '2', icon: '🖱️', name: 'Ratón', price: '39 €' },
+  { id: '3', icon: '🖥️', name: 'Monitor', price: '199 €' },
+  { id: '4', icon: '🎧', name: 'Auriculares', price: '79 €' },
+  { id: '5', icon: '💻', name: 'Portátil', price: '899 €' },
+  { id: '6', icon: '📱', name: 'Móvil', price: '599 €' },
+];
 
 export default function App() {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>Noticias</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Productos</Text>
 
-      <NewsCard category="TECNOLOGÍA" title="IA y desarrollo" />
-      <NewsCard category="MÓVIL" title="React Native" />
-      <NewsCard category="CLOUD" title="Arquitecturas cloud" />
-      <NewsCard category="DISEÑO" title="Interfaces accesibles" />
-    </ScrollView>
-  );
-}
-
-function NewsCard({ category, title }: { category: string; title: string }) {
-  return (
-    <View style={styles.card}>
-      <Text style={styles.category}>{category}</Text>
-      <Text style={styles.title}>{title}</Text>
+      <FlatList
+        data={products}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.card}>
+            <Text style={styles.icon}>{item.icon}</Text>
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.price}>{item.price}</Text>
+          </View>
+        )}
+      />
     </View>
   );
 }
@@ -25,31 +34,39 @@ function NewsCard({ category, title }: { category: string; title: string }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0e1d43',
-    paddingHorizontal: 20,
-  },
-  header: {
-    fontSize: 34,
-    fontWeight: 'bold',
-    marginTop: 60,
-    marginBottom: 20,
-    color: '#ffffff',
-  },
-  card: {
-    backgroundColor: '#161b22',
-    padding: 18,
-    borderRadius: 18,
-    marginBottom: 14,
-  },
-  category: {
-    color: '#60a5fa',
-    fontSize: 12,
-    fontWeight: 'bold',
+    paddingHorizontal: 16,
+    paddingTop: 20,
+    backgroundColor: '#19274b',
   },
   title: {
-    marginTop: 7,
-    fontSize: 20,
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#ffffff',
+  },
+  row: {
+    gap: 10,
+    marginBottom: 8,
+  },
+  card: {
+    width: '48%',
+    backgroundColor: '#161b22',
+    padding: 10,
+    borderRadius: 12,
+  },
+  icon: {
+    fontSize: 24,
+  },
+  name: {
+    marginTop: 6,
+    fontSize: 14,
     fontWeight: 'bold',
     color: '#ffffff',
+  },
+  price: {
+    marginTop: 2,
+    color: '#60a5fa',
+    fontWeight: 'bold',
+    fontSize: 13,
   },
 });
