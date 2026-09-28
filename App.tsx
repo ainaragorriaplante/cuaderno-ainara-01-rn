@@ -1,15 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
       <View style={styles.card}>
-        <Text style={styles.title}>¡Bienvenido!</Text>
-        <Text style={styles.subtitle}>Diseño de interfaces con React Native</Text>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>COMENZAR</Text>
+        <Image
+          source={{ uri: 'https://i.pravatar.cc/300' }}
+          style={styles.avatar}
+        />
+        <Text style={styles.name}>Laura Martínez</Text>
+        <Text style={styles.job}>Diseñadora UX/UI</Text>
+
+        <View style={styles.stats}>
+          <View style={styles.stat}>
+            <Text style={styles.number}>24</Text>
+            <Text style={styles.label}>Proyectos</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={styles.number}>1280</Text>
+            <Text style={styles.label}>Seguidores</Text>
+          </View>
+          <View style={styles.stat}>
+            <Text style={styles.number}>86</Text>
+            <Text style={styles.label}>Contactos</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -20,44 +34,47 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
     padding: 24,
-    backgroundColor: '#0f172a',
+    backgroundColor: '#19283c',
   },
   card: {
-    backgroundColor: '#251f18',
-    padding: 26,
-    borderRadius: 24,
+    backgroundColor: '#262626',
+    padding: 28,
+    borderRadius: 22,
     alignItems: 'center',
-    width: '90%',
   },
-  title: {
-    fontSize: 24,
+  avatar: {
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+  },
+  name: {
+    marginTop: 18,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: '#fd8f63',
-    textAlign: 'center',
-    marginBottom: 8,
+    color: '#e2e8f0',
   },
-  subtitle: {
-    marginTop: 14,
-    fontSize: 18,
-    lineHeight: 25,
-    color: '#8797af',
-    textAlign: 'center',
-    marginBottom: 20,
+  job: {
+    marginTop: 4,
+    color: '#64748b',
   },
-  button: {
-    marginTop: 12,
-    backgroundColor: '#ea580c',
-    paddingVertical: 14,
-    paddingHorizontal: 30,
-    borderRadius: 14,
+  stats: {
+    color: '#eff2f6',
+    flexDirection: 'row',
+    gap: 28,
+    marginTop: 24,
   },
-  buttonText: {
+  stat: {
+    color: '#f4f4f4',
+    alignItems: 'center',
+  },
+  number: {
+    color: '#f4f4f4',
+    fontSize: 21,
+    fontWeight: 'bold',
+  },
+  label:{
+    fontSize: 14,
     color: '#ffffff',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
+  }
 });
-
